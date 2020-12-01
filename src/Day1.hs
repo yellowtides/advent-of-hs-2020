@@ -26,10 +26,10 @@ printSols (inp1, inp2) = do
     let sol1 = fixExpense 2020 inp1
     if sol1 == Nothing
         then putStrLn "No solution found for D1S1."
-        else (putStrLn . show) sol1
+        else putStrLn $ "Star #1: " ++ show sol1
 
     let sol2 = fixExpense3 2020 inp2
     if sol2 == Nothing
         then putStrLn "No solution found for D1S2."
-        else (putStrLn . show) sol2
+        else putStrLn $ "Star #2: " ++ show sol2
     pure ()
