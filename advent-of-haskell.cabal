@@ -25,13 +25,16 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      Day1
+      Utils
   other-modules:
       Paths_advent_of_haskell
   hs-source-dirs:
       src
   build-depends:
       base >=4.7 && <5
+    , split >=0.2
+    , unordered-containers >=0.2
   default-language: Haskell2010
 
 executable advent-of-haskell-exe
@@ -44,6 +47,8 @@ executable advent-of-haskell-exe
   build-depends:
       advent-of-haskell
     , base >=4.7 && <5
+    , split >=0.2
+    , unordered-containers >=0.2
   default-language: Haskell2010
 
 test-suite advent-of-haskell-test
@@ -57,4 +62,6 @@ test-suite advent-of-haskell-test
   build-depends:
       advent-of-haskell
     , base >=4.7 && <5
+    , split >=0.2
+    , unordered-containers >=0.2
   default-language: Haskell2010
