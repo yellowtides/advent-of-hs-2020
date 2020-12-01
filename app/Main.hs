@@ -2,8 +2,8 @@ module Main where
 
 import System.IO
 import Data.List.Split (splitOn)
-import Control.Monad (guard)
-import qualified Day1 as D1 (printsols)
+import Control.Monad (when, fail)
+import qualified Day1 as D1 (printSols)
 
 pad2Dig :: Int -> String
 pad2Dig n
@@ -15,11 +15,13 @@ main = do
     putStrLn "Please input a day."
     day <- getLine
     let day' = read day
-    guard $ day' > 0 && day' < 50
+    when (not $ day' > 0 && day' < 26) 
+         (fail "Please input a _valid_ day.")
     file1 <- readFile $ "inputs/star" ++ pad2Dig (day' * 2 - 1) ++ ".txt"
     file2 <- readFile $ "inputs/star" ++ pad2Dig (day' * 2)     ++ ".txt"
-    let (inps1, inps2) = (splitOn "\n" file1, splitOn "\n" file2)
     case day' of
-        1         -> D1.printsols (map read inps1) (map read inps2)
-        otherwise -> putStrLn "Please input a _valid_ day."
+        1         -> D1.printSols (map read $ splitOn "\n" file1, 
+                                   map read $ splitOn "\n" file2)
+        2         -> putStrLn "Patience, fren."
+        otherwise -> putStrLn "Patience, fren."
     pure ()
