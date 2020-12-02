@@ -24,8 +24,8 @@ main = do
     file2 <- readFile $ "inputs/star" ++ pad2Dig (day' * 2)     ++ ".txt"
     case day' of
         1 -> D1.printSols (map read $ splitOn "\n" file1, 
-                                   map read $ splitOn "\n" file2)
+                           map read $ splitOn "\n" file2)
         2 -> D2.printSols (map parseConstraint $ splitOn "\n" file1,
-                                   map parseConstraint $ splitOn "\n" file2)
+                           map parseConstraint $ splitOn "\n" file2)
         _ -> putStrLn "Patience, fren."
     pure ()
