@@ -21,15 +21,5 @@ fixExpense3 n xs = (fmap (uncurry (*)) . safeHead)
                         let twoProd = fixExpense (n - k3) (delete k3 xs),
                         isJust twoProd]
 
-printSols :: ([Int], [Int]) -> IO ()
-printSols (inp1, inp2) = do
-    let sol1 = fixExpense 2020 inp1
-    if sol1 == Nothing
-        then putStrLn "No solution found for D1S1."
-        else putStrLn $ "Star #1: " ++ show sol1
-
-    let sol2 = fixExpense3 2020 inp2
-    if isNothing sol2 
-        then putStrLn "No solution found for D1S2."
-        else putStrLn $ "Star #2: " ++ show sol2
-    pure ()
+getSols :: ([Int], [Int]) -> (String, String)
+getSols (inp1, inp2) = (show $ fixExpense 2020 inp1, show $ fixExpense3 2020 inp2)

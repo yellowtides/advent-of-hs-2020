@@ -12,9 +12,6 @@ cVIndex :: [((Int, Int), Char, String)] -> Int
 cVIndex = sum . map (\((lo, hi), ch, pass) -> 
                      fromEnum $ (pass!!(lo-1) == ch) `xor` (pass!!(hi-1) == ch))
 
-printSols :: ([((Int, Int), Char, String)], 
-              [((Int, Int), Char, String)]) -> IO ()
-printSols (inp1, inp2) = do
-    putStrLn $ "Star #1: " ++ show (countValid inp1)
-    putStrLn $ "Star #2: " ++ show (cVIndex inp2)
-    pure ()
+getSols :: ([((Int, Int), Char, String)], 
+            [((Int, Int), Char, String)]) -> (String, String)
+getSols (inp1, inp2) = (show $ countValid inp1, show $ cVIndex inp2)
