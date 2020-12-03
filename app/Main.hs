@@ -6,6 +6,7 @@ import Control.Monad (unless, fail)
 
 import qualified Day1 as D1 (getSols)
 import qualified Day2 as D2 (getSols)
+import qualified Day3 as D3 (getSols)
 
 import Utils (parseConstraint)
 
@@ -28,6 +29,8 @@ main = do
                              map read $ splitOn "\n" file2)
             2 -> D2.getSols (map parseConstraint $ splitOn "\n" file1,
                              map parseConstraint $ splitOn "\n" file2)
+            3 -> D3.getSols (splitOn "\n" file1, 
+                             splitOn "\n" file2)
             _ -> error "Patience, fren."
     putStrLn $ "Star #1: " ++ star1
     putStrLn $ "Star #2: " ++ star2
