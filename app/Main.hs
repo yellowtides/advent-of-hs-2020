@@ -7,8 +7,9 @@ import Control.Monad (unless, fail)
 import qualified Day1 as D1 (getSols)
 import qualified Day2 as D2 (getSols)
 import qualified Day3 as D3 (getSols)
+import qualified Day4 as D4 (getSols)
 
-import Utils (parseConstraint)
+import Utils (parseConstraint, isBetween)
 
 pad2Dig :: Int -> String
 pad2Dig n
@@ -20,7 +21,7 @@ main = do
     putStrLn "Please input a day."
     day <- getLine
     let day' = read day
-    unless (day' > 0 && day' < 26) 
+    unless (isBetween (1, 25) day') 
            (fail "Please input a _valid_ day.")
     file1 <- readFile $ "inputs/star" ++ pad2Dig (day' * 2 - 1) ++ ".txt"
     file2 <- readFile $ "inputs/star" ++ pad2Dig (day' * 2)     ++ ".txt"
@@ -31,6 +32,8 @@ main = do
                              map parseConstraint $ splitOn "\n" file2)
             3 -> D3.getSols (splitOn "\n" file1, 
                              splitOn "\n" file2)
+            4 -> D4.getSols (splitOn "\n\n" file1, 
+                             splitOn "\n\n" file2)
             _ -> error "Patience, fren."
     putStrLn $ "Star #1: " ++ star1
     putStrLn $ "Star #2: " ++ star2

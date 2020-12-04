@@ -1,5 +1,7 @@
 module Utils where
 
+import qualified Data.Set as S
+
 safeHead :: [a] -> Maybe a
 safeHead [] = Nothing
 safeHead xs = Just $ head xs
@@ -17,4 +19,12 @@ xor False True  = True
 xor _     _     = False
 
 isBetween :: (Num a, Ord a) => (a, a) -> a -> Bool
-isBetween (a, b) x = a >= x && x <= b
+isBetween (a, b) x = a <= x && x <= b
+
+-- predicate conjunction
+(&:&) :: (a -> Bool) -> (a -> Bool) -> (a -> Bool)
+(&:&) p1 p2 = \t -> p1 t && p2 t
+
+-- predicate disjunction
+(|:|) :: (a -> Bool) -> (a -> Bool) -> (a -> Bool)
+(|:|) p1 p2 = \t -> p1 t || p2 t
