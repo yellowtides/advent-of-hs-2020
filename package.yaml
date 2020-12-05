@@ -24,7 +24,8 @@ dependencies:
 - unordered-containers >= 0.2
 - containers >= 0.6
 - split >= 0.2
-- utility-ht
+- utility-ht >= 0.0.15
+- sort >= 1.0
 
 library:
   source-dirs: src

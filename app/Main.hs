@@ -8,6 +8,7 @@ import qualified Day1 as D1 (getSols)
 import qualified Day2 as D2 (getSols)
 import qualified Day3 as D3 (getSols)
 import qualified Day4 as D4 (getSols)
+import qualified Day5 as D5 (getSols)
 
 import Utils (parseConstraint, isBetween)
 
@@ -34,6 +35,8 @@ main = do
                              splitOn "\n" file2)
             4 -> D4.getSols (splitOn "\n\n" file1, 
                              splitOn "\n\n" file2)
+            5 -> D5.getSols (splitOn "\n" file1, 
+                             splitOn "\n" file2)
             _ -> error "Patience, fren."
     putStrLn $ "Star #1: " ++ star1
     putStrLn $ "Star #2: " ++ star2

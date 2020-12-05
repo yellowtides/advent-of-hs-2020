@@ -29,6 +29,7 @@ library
       Day2
       Day3
       Day4
+      Day5
       Utils
   other-modules:
       Paths_advent_of_haskell
@@ -37,9 +38,10 @@ library
   build-depends:
       base >=4.7 && <5
     , containers >=0.6
+    , sort >=1.0
     , split >=0.2
     , unordered-containers >=0.2
-    , utility-ht
+    , utility-ht >=0.0.15
   default-language: Haskell2010
 
 executable advent-of-haskell-exe
@@ -53,9 +55,10 @@ executable advent-of-haskell-exe
       advent-of-haskell
     , base >=4.7 && <5
     , containers >=0.6
+    , sort >=1.0
     , split >=0.2
     , unordered-containers >=0.2
-    , utility-ht
+    , utility-ht >=0.0.15
   default-language: Haskell2010
 
 test-suite advent-of-haskell-test
@@ -70,7 +73,8 @@ test-suite advent-of-haskell-test
       advent-of-haskell
     , base >=4.7 && <5
     , containers >=0.6
+    , sort >=1.0
     , split >=0.2
     , unordered-containers >=0.2
-    , utility-ht
+    , utility-ht >=0.0.15
   default-language: Haskell2010
