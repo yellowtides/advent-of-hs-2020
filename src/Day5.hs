@@ -24,9 +24,6 @@ passToLoc s = let (rowStr, colStr) = break (`elem` "LR") s in
 getID :: String -> Int
 getID = uncurry (+) . first (8 *) . passToLoc
 
-getLowestID :: [String] -> Int
-getLowestID = maximum . map getID
-
 getHighestID :: [String] -> Int
 getHighestID = maximum . map getID
 
