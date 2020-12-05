@@ -3,15 +3,6 @@ module Day5 where
 import Data.Bifunctor (first)
 import Data.Sort (sort)
 
-{-
-    [[row ID binary rep (127 complement)]]
-    F -> 1
-    B -> 0
-    
-    [[column ID binary rep (7 complement)]]
-    R -> 0
-    L -> 1
--}
 readPassC :: String -> Int
 readPassC = foldl1 ((+) . (* 2)) . map (\x -> case x of {'F' -> 1; 'B' -> 0;
                                                          'L' -> 1; 'R' -> 0})
