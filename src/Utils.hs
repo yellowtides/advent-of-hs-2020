@@ -1,5 +1,9 @@
 module Utils where
 
+import Data.List.Split (splitOn, splitOneOf)
+import Data.List (delete)
+import Data.Char (isDigit)
+
 import qualified Data.Set as S
 
 safeHead :: [a] -> Maybe a
@@ -12,6 +16,22 @@ parseConstraint s = let (lo, s1) = break (== '-') s
                         (ch, s3) = break (== ':') (drop 1 s2)
                         s'       = drop 2 s3 in
                     ((read lo, read hi), head ch, s')
+
+type SackNum  = (Int, String)
+type SackRule = (String, [SackNum])
+
+parseSackRule :: String -> SackRule
+parseSackRule s = let [f, css] = splitOn "s contain" s 
+                      cs       = map tail . init $ splitOneOf ",." css
+                      csParsed = delete (0, "") $ map parseSackNum cs in
+                  (f, csParsed)
+
+parseSackNum :: String -> SackNum
+parseSackNum s 
+    | take 2 s == "no" = (0, "")
+    | otherwise        = let cs    = drop 1 $ dropWhile isDigit s 
+                             count = read $ takeWhile isDigit s in
+                         (count, if last cs == 's' then init cs else cs)
 
 xor :: Bool -> Bool -> Bool
 xor True  False = True
