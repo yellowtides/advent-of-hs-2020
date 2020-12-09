@@ -1,14 +1,21 @@
 module Utils where
 
 import Data.List.Split (splitOn, splitOneOf)
-import Data.List (delete)
+import Data.List (delete, splitAt, inits, tails)
 import Data.Char (isDigit)
+import Data.Bifunctor (first)
 
 import qualified Data.Set as S
 
 safeHead :: [a] -> Maybe a
 safeHead [] = Nothing
 safeHead xs = Just $ head xs
+
+splitAtRev :: Int -> [a] -> ([a], [a])
+splitAtRev n = first reverse . splitAt n
+
+subLists :: [a] -> [[a]]
+subLists = concat . map tails . inits
 
 parseConstraint :: String -> ((Int, Int), Char, String)
 parseConstraint s = let (lo, s1) = break (== '-') s
