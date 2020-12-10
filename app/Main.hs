@@ -13,6 +13,7 @@ import qualified Day6 as D6 (getSols)
 import qualified Day7 as D7 (getSols)
 import qualified Day8 as D8 (getSols)
 import qualified Day9 as D9 (getSols)
+import qualified Day10 as D10 (getSols)
 
 import Utils (parseConstraint, parseSackRule, isBetween)
 
@@ -31,24 +32,26 @@ main = do
     file1 <- readFile $ "inputs/star" ++ pad2Dig (day' * 2 - 1) ++ ".txt"
     file2 <- readFile $ "inputs/star" ++ pad2Dig (day' * 2)     ++ ".txt"
     let (star1, star2) = case day' of
-            1 -> D1.getSols (map read $ splitOn "\n" file1, 
-                             map read $ splitOn "\n" file2)
-            2 -> D2.getSols (map parseConstraint $ splitOn "\n" file1,
-                             map parseConstraint $ splitOn "\n" file2)
-            3 -> D3.getSols (splitOn "\n" file1, 
-                             splitOn "\n" file2)
-            4 -> D4.getSols (splitOn "\n\n" file1, 
-                             splitOn "\n\n" file2)
-            5 -> D5.getSols (splitOn "\n" file1, 
-                             splitOn "\n" file2)
-            6 -> D6.getSols (splitOn "\n\n" file1, 
-                             splitOn "\n\n" file2)
-            7 -> D7.getSols (map parseSackRule $ splitOn "\n" file1, 
-                             map parseSackRule $ splitOn "\n" file2)
-            8 -> D8.getSols (splitOn "\n" file1,
-                             splitOn "\n" file2)
-            9 -> D9.getSols (map read $ splitOn "\n" file1,
-                             map read $ splitOn "\n" file2)
+            1 ->  D1.getSols  (map read $ splitOn "\n" file1, 
+                               map read $ splitOn "\n" file2)
+            2 ->  D2.getSols  (map parseConstraint $ splitOn "\n" file1,
+                               map parseConstraint $ splitOn "\n" file2)
+            3 ->  D3.getSols  (splitOn "\n" file1, 
+                               splitOn "\n" file2)
+            4 ->  D4.getSols  (splitOn "\n\n" file1, 
+                               splitOn "\n\n" file2)
+            5 ->  D5.getSols  (splitOn "\n" file1, 
+                               splitOn "\n" file2)
+            6 ->  D6.getSols  (splitOn "\n\n" file1, 
+                               splitOn "\n\n" file2)
+            7 ->  D7.getSols  (map parseSackRule $ splitOn "\n" file1, 
+                               map parseSackRule $ splitOn "\n" file2)
+            8 ->  D8.getSols  (splitOn "\n" file1,
+                               splitOn "\n" file2)
+            9 ->  D9.getSols  (map read $ splitOn "\n" file1,
+                               map read $ splitOn "\n" file2)
+            10 -> D10.getSols (map read $ splitOn "\n" file1,
+                               map read $ splitOn "\n" file2)
             _ -> error "Patience, fren."
     putStrLn $ "Star #1: " ++ star1
     putStrLn $ "Star #2: " ++ star2
