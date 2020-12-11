@@ -35,13 +35,15 @@ library
       Day08
       Day09
       Day10
+      Day11
       Utils
   other-modules:
       Paths_advent_of_haskell
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && <5
+      array >=0.5.4
+    , base >=4.7 && <5
     , containers >=0.6
     , sort >=1.0
     , split >=0.2
@@ -58,6 +60,7 @@ executable advent-of-haskell-exe
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       advent-of-haskell
+    , array >=0.5.4
     , base >=4.7 && <5
     , containers >=0.6
     , sort >=1.0
@@ -76,6 +79,7 @@ test-suite advent-of-haskell-test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       advent-of-haskell
+    , array >=0.5.4
     , base >=4.7 && <5
     , containers >=0.6
     , sort >=1.0

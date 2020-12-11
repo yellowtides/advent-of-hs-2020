@@ -14,6 +14,7 @@ import qualified Day07 as D07 (getSols)
 import qualified Day08 as D08 (getSols)
 import qualified Day09 as D09 (getSols)
 import qualified Day10 as D10 (getSols)
+import qualified Day11 as D11 (getSols)
 
 import Utils (parseConstraint, parseSackRule, isBetween)
 
@@ -52,6 +53,8 @@ main = do
                                map read $ splitOn "\n" file2)
             10 -> D10.getSols (map read $ splitOn "\n" file1,
                                map read $ splitOn "\n" file2)
+            11 -> D11.getSols (splitOn "\n" file1,
+                               splitOn "\n" file2)
             _ -> error "Patience, fren."
     putStrLn $ "Star #1: " ++ star1
     putStrLn $ "Star #2: " ++ star2

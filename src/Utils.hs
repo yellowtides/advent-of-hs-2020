@@ -17,6 +17,9 @@ splitAtRev n = first reverse . splitAt n
 subLists :: [a] -> [[a]]
 subLists = concat . map tails . inits
 
+many :: Eq a => (a -> a) -> a -> a
+many = until =<< ((==) =<<)
+
 parseConstraint :: String -> ((Int, Int), Char, String)
 parseConstraint s = let (lo, s1) = break (== '-') s
                         (hi, s2) = break (== ' ') (drop 1 s1)

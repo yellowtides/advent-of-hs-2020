@@ -26,6 +26,7 @@ dependencies:
 - split >= 0.2
 - utility-ht >= 0.0.15
 - sort >= 1.0
+- array >= 0.5.4
 
 library:
   source-dirs: src
