@@ -4,6 +4,7 @@ import Data.List.Split (splitOn, splitOneOf)
 import Data.List (delete, splitAt, inits, tails)
 import Data.Char (isDigit)
 import Data.Bifunctor (first)
+import Data.Array
 
 import qualified Data.Set as S
 
@@ -58,3 +59,16 @@ isBetween (a, b) x = a <= x && x <= b
 -- predicate disjunction
 (|:|) :: (a -> Bool) -> (a -> Bool) -> (a -> Bool)
 (|:|) p1 p2 = \t -> p1 t || p2 t
+
+-- 2d array stuff
+
+genIndex :: (Int, Int) -> [(Int, Int)]
+genIndex (st, fi) = (,) <$> [st..fi] <*> [st..fi]
+
+mkMatrix :: [[a]] -> Array (Int, Int) a
+mkMatrix inp = array ((0, 0), (length inp - 1, length inp - 1)) 
+               $ zip (genIndex (0, length inp - 1)) (concat inp)
+
+isInBounds :: (Int, Int) -> Array (Int, Int) a -> Bool
+isInBounds (i, j) aii = i >= (fst . fst) (bounds aii) && j >= (snd . fst) (bounds aii) 
+                     && i <= (fst . snd) (bounds aii) && j <= (snd . snd) (bounds aii)
