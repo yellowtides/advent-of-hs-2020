@@ -4,15 +4,15 @@ import System.IO
 import Data.List.Split (splitOn)
 import Control.Monad (unless, fail)
 
-import qualified Day1 as D1 (getSols)
-import qualified Day2 as D2 (getSols)
-import qualified Day3 as D3 (getSols)
-import qualified Day4 as D4 (getSols)
-import qualified Day5 as D5 (getSols)
-import qualified Day6 as D6 (getSols)
-import qualified Day7 as D7 (getSols)
-import qualified Day8 as D8 (getSols)
-import qualified Day9 as D9 (getSols)
+import qualified Day01 as D01 (getSols)
+import qualified Day02 as D02 (getSols)
+import qualified Day03 as D03 (getSols)
+import qualified Day04 as D04 (getSols)
+import qualified Day05 as D05 (getSols)
+import qualified Day06 as D06 (getSols)
+import qualified Day07 as D07 (getSols)
+import qualified Day08 as D08 (getSols)
+import qualified Day09 as D09 (getSols)
 import qualified Day10 as D10 (getSols)
 
 import Utils (parseConstraint, parseSackRule, isBetween)
@@ -32,23 +32,23 @@ main = do
     file1 <- readFile $ "inputs/star" ++ pad2Dig (day' * 2 - 1) ++ ".txt"
     file2 <- readFile $ "inputs/star" ++ pad2Dig (day' * 2)     ++ ".txt"
     let (star1, star2) = case day' of
-            1 ->  D1.getSols  (map read $ splitOn "\n" file1, 
+            1 ->  D01.getSols  (map read $ splitOn "\n" file1, 
                                map read $ splitOn "\n" file2)
-            2 ->  D2.getSols  (map parseConstraint $ splitOn "\n" file1,
+            2 ->  D02.getSols  (map parseConstraint $ splitOn "\n" file1,
                                map parseConstraint $ splitOn "\n" file2)
-            3 ->  D3.getSols  (splitOn "\n" file1, 
+            3 ->  D03.getSols  (splitOn "\n" file1, 
                                splitOn "\n" file2)
-            4 ->  D4.getSols  (splitOn "\n\n" file1, 
+            4 ->  D04.getSols  (splitOn "\n\n" file1, 
                                splitOn "\n\n" file2)
-            5 ->  D5.getSols  (splitOn "\n" file1, 
+            5 ->  D05.getSols  (splitOn "\n" file1, 
                                splitOn "\n" file2)
-            6 ->  D6.getSols  (splitOn "\n\n" file1, 
+            6 ->  D06.getSols  (splitOn "\n\n" file1, 
                                splitOn "\n\n" file2)
-            7 ->  D7.getSols  (map parseSackRule $ splitOn "\n" file1, 
+            7 ->  D07.getSols  (map parseSackRule $ splitOn "\n" file1, 
                                map parseSackRule $ splitOn "\n" file2)
-            8 ->  D8.getSols  (splitOn "\n" file1,
+            8 ->  D08.getSols  (splitOn "\n" file1,
                                splitOn "\n" file2)
-            9 ->  D9.getSols  (map read $ splitOn "\n" file1,
+            9 ->  D09.getSols  (map read $ splitOn "\n" file1,
                                map read $ splitOn "\n" file2)
             10 -> D10.getSols (map read $ splitOn "\n" file1,
                                map read $ splitOn "\n" file2)

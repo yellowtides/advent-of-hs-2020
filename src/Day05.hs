@@ -1,4 +1,4 @@
-module Day5 where
+module Day05 where
 
 import Data.Bifunctor (first)
 import Data.Sort (sort)

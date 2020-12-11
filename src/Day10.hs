@@ -5,8 +5,6 @@ import qualified Data.HashMap.Lazy as HM
 import Data.Sort (sort)
 import Data.Maybe (fromJust)
 
-import Utils (splitAtRev, subLists)
-
 -- Star #1
 
 getDiffC :: Int -> [Int] -> Int

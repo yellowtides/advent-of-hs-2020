@@ -1,4 +1,4 @@
-module Day3 where
+module Day03 where
 
 downSlope :: (Int, Int) -> Int -> [String] -> Int
 downSlope _      _     [] = 0

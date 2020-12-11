@@ -1,4 +1,4 @@
-module Day7 where
+module Day07 where
 
 import qualified Data.HashMap.Lazy as HM
 import Data.Maybe (fromJust, isJust, isNothing)
