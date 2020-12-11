@@ -14,9 +14,9 @@ getNeighb :: (Int, Int) -> [(Int, Int)]
 getNeighb (i, j) = delete (i, j) $ (,) <$> [i-1..i+1] <*> [j-1..j+1]
 
 countOccupied :: (Int, Int) -> Array (Int, Int) Char -> Int
-countOccupied (i, j) aii = length . filter (== True) . map safeIndex $ getNeighb  (i, j)
-                      where 
-                          safeIndex (i, j) = isInBounds (i, j) aii && aii!(i, j) == '#'
+countOccupied (i, j) aii = length . filter isOccupSafe $ getNeighb  (i, j)
+                         where 
+                             isOccupSafe (i, j) = isInBounds (i, j) aii && aii!(i, j) == '#'
 
 changeOn :: ((Int, Int) -> Array (Int, Int) Char -> Bool) ->
                 Char -> Array (Int, Int) Char  -> Array (Int, Int) Char
@@ -35,9 +35,9 @@ hashH = changeOn (\ij -> (>= 4) . countOccupied ij) '#'
 -- Star #2
 
 countOccupiedVis :: (Int, Int) -> Array (Int, Int) Char -> Int
-countOccupiedVis (i, j) aii = length . filter (== True) . map isOccup $ getNeighb (i, j)
+countOccupiedVis (i, j) aii = length . filter isOccupSafe' $ getNeighb (i, j)
                         where
-                            isOccup (i', j') = go' (i', j') (i' - i, j' -j) == '#'
+                            isOccupSafe' (i', j')             = go' (i', j') (i' - i, j' - j) == '#'
                             go' (i, j) (diri, dirj)
                                 | not $ isInBounds (i, j) aii = '.'
                                 | aii!(i, j) == '#'           = '#'
@@ -51,5 +51,5 @@ hashH' :: Array (Int, Int) Char  -> Array (Int, Int) Char
 hashH' = changeOn (\ij -> (>= 5) . countOccupiedVis ij) '#'
 
 getSols :: ([String], [String]) -> (String, String)
-getSols (inp1, inp2) = (show . countHash $ many (hashH . hashL) (mkMatrix inp1),
+getSols (inp1, inp2) = (show . countHash $ many (hashH . hashL)   (mkMatrix inp1),
                         show . countHash $ many (hashH' . hashL') (mkMatrix inp2))
