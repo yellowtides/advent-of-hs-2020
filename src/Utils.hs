@@ -44,6 +44,9 @@ parseSackNum s
                              count = read $ takeWhile isDigit s in
                          (count, if last cs == 's' then init cs else cs)
 
+parseCommand :: String -> (Char, Double)
+parseCommand = first head . fmap read . break isDigit
+
 xor :: Bool -> Bool -> Bool
 xor True  False = True
 xor False True  = True

@@ -15,8 +15,10 @@ import qualified Day08 as D08 (getSols)
 import qualified Day09 as D09 (getSols)
 import qualified Day10 as D10 (getSols)
 import qualified Day11 as D11 (getSols)
+import qualified Day12 as D12 (getSols)
 
-import Utils (parseConstraint, parseSackRule, isBetween)
+import Utils (parseConstraint, parseSackRule, isBetween,
+              parseCommand)
 
 pad2Dig :: Int -> String
 pad2Dig n
@@ -46,7 +48,7 @@ main = do
             6 ->  D06.getSols  (splitOn "\n\n" file1, 
                                splitOn "\n\n" file2)
             7 ->  D07.getSols  (map parseSackRule $ splitOn "\n" file1, 
-                               map parseSackRule $ splitOn "\n" file2)
+                                map parseSackRule $ splitOn "\n" file2)
             8 ->  D08.getSols  (splitOn "\n" file1,
                                splitOn "\n" file2)
             9 ->  D09.getSols  (map read $ splitOn "\n" file1,
@@ -55,6 +57,8 @@ main = do
                                map read $ splitOn "\n" file2)
             11 -> D11.getSols (splitOn "\n" file1,
                                splitOn "\n" file2)
+            12 -> D12.getSols (map parseCommand $ splitOn "\n" file1,
+                               map parseCommand $ splitOn "\n" file2)
             _ -> error "Patience, fren."
     putStrLn $ "Star #1: " ++ star1
     putStrLn $ "Star #2: " ++ star2
