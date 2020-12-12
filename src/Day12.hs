@@ -1,54 +1,47 @@
 module Day12 where
 
-import Data.Function (on)
+import Linear.V2
+import Linear.Matrix ((!*))
+import Linear.Vector ((^*), zero, unit)
 
-type Vec = (Double, Double)
+type Vec = V2 Double
 
 -- Star #1
 
-(+:+) :: Vec -> Vec -> Vec
-(+:+) (i, j) (a, b) = (i+a, j+b)
-
-scale :: Double -> Vec -> Vec
-scale k (a, b) = (k*a, k*b)
-
-(-:-) :: Vec -> Vec -> Vec
-(-:-) x y = x +:+ scale (-1) y
+rotateR :: Double -> Vec -> Vec
+rotateR n v = let n' = n * pi / 180 in
+              V2 (V2 (cos n') (sin n')) (V2 (negate $ sin n') (cos n')) !* v
 
 rotateL :: Double -> Vec -> Vec
-rotateL n (i, j) = let n' = (negate n) * pi / 180 in
-                     scale i (cos n', sin n') +:+ scale j (negate $ sin n', cos n')
-
-rotateR :: Double -> Vec -> Vec
-rotateR = rotateL . negate
+rotateL = rotateR . negate
 
 travel :: [(Char, Double)] -> Vec -> Vec -> Vec
-travel [] (i, j) _ = (i, j)
-travel ((c, n):xs) pos@(i, j) dir@(i', j')
-    | c == 'N' = travel xs (i + n, j) dir 
-    | c == 'S' = travel xs (i - n, j) dir
-    | c == 'E' = travel xs (i, j + n) dir
-    | c == 'W' = travel xs (i, j - n) dir
+travel [] pos _ = pos
+travel ((c, n):xs) pos dir
+    | c == 'N' = travel xs (pos + unit _y ^* n) dir 
+    | c == 'S' = travel xs (pos - unit _y ^* n) dir
+    | c == 'E' = travel xs (pos + unit _x ^* n) dir
+    | c == 'W' = travel xs (pos - unit _x ^* n) dir
     | c == 'L' = travel xs pos (rotateL n dir)
     | c == 'R' = travel xs pos (rotateR n dir)
-    | c == 'F' = travel xs (pos +:+ scale n dir) dir
+    | c == 'F' = travel xs (pos + dir ^* n) dir
 
 -- Star #2
 
 travel' :: [(Char, Double)] -> Vec -> Vec -> Vec
 travel' [] pos _ = pos
-travel' ((c, n):xs) pos@(i, j) dir@(i', j')
-    | c == 'N' = travel' xs pos (i' + n, j') 
-    | c == 'S' = travel' xs pos (i' - n, j')
-    | c == 'E' = travel' xs pos (i', j' + n)
-    | c == 'W' = travel' xs pos (i', j' - n)
+travel' ((c, n):xs) pos dir
+    | c == 'N' = travel' xs pos (dir + unit _y ^* n)
+    | c == 'S' = travel' xs pos (dir - unit _y ^* n)
+    | c == 'E' = travel' xs pos (dir + unit _x ^* n)
+    | c == 'W' = travel' xs pos (dir - unit _x ^* n)
     | c == 'L' = travel' xs pos (rotateL n dir)
     | c == 'R' = travel' xs pos (rotateR n dir)
-    | c == 'F' = travel' xs (pos +:+ scale n dir) dir
+    | c == 'F' = travel' xs (pos + dir ^* n) dir
 
-manhattan :: Double -> Double -> Double
-manhattan  = (+) `on` abs
+manhattan :: Vec -> Double
+manhattan  = sum . fmap abs
 
 getSols :: ([(Char, Double)], [(Char, Double)]) -> (String, String)
-getSols (inp1, inp2) = (show . uncurry manhattan $ travel inp1 (0, 0) (0, 1),
-                        show . uncurry manhattan $ travel' inp2 (0, 0) (1, 10))
+getSols (inp1, inp2) = (show . round . manhattan $ travel  inp1 zero (V2 1 0),
+                        show . round . manhattan $ travel' inp2 zero (V2 10 1))
