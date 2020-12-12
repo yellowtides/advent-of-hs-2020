@@ -15,9 +15,12 @@ scale k (a, b) = (k*a, k*b)
 (-:-) :: Vec -> Vec -> Vec
 (-:-) x y = x +:+ scale (-1) y
 
-rotateLeft :: Double -> Vec -> Vec
-rotateLeft n (i, j) = let n' = (negate n) * pi / 180 in
+rotateL :: Double -> Vec -> Vec
+rotateL n (i, j) = let n' = (negate n) * pi / 180 in
                      scale i (cos n', sin n') +:+ scale j (negate $ sin n', cos n')
+
+rotateR :: Double -> Vec -> Vec
+rotateR = rotateL . negate
 
 travel :: [(Char, Double)] -> Vec -> Vec -> Vec
 travel [] (i, j) _ = (i, j)
@@ -26,8 +29,8 @@ travel ((c, n):xs) pos@(i, j) dir@(i', j')
     | c == 'S' = travel xs (i - n, j) dir
     | c == 'E' = travel xs (i, j + n) dir
     | c == 'W' = travel xs (i, j - n) dir
-    | c == 'L' = travel xs pos (rotateLeft n dir)
-    | c == 'R' = travel (('L', negate n):xs) pos dir
+    | c == 'L' = travel xs pos (rotateL n dir)
+    | c == 'R' = travel xs pos (rotateR n dir)
     | c == 'F' = travel xs (pos +:+ scale n dir) dir
 
 -- Star #2
@@ -39,8 +42,8 @@ travel' ((c, n):xs) pos@(i, j) dir@(i', j')
     | c == 'S' = travel' xs pos (i' - n, j')
     | c == 'E' = travel' xs pos (i', j' + n)
     | c == 'W' = travel' xs pos (i', j' - n)
-    | c == 'L' = travel' xs pos (rotateLeft n dir)
-    | c == 'R' = travel' (('L', negate n):xs) pos dir
+    | c == 'L' = travel' xs pos (rotateL n dir)
+    | c == 'R' = travel' xs pos (rotateR n dir)
     | c == 'F' = travel' xs (pos +:+ scale n dir) dir
 
 manhattan :: Double -> Double -> Double
