@@ -47,6 +47,16 @@ parseSackNum s
 parseCommand :: String -> (Char, Double)
 parseCommand = first head . fmap read . break isDigit
 
+parseBusInput :: (String, String) -> (Int, [Int])
+parseBusInput (xS, xsS) = (read xS, map read . filter (/= "x") $ splitOn "," (tail xsS))
+
+parseBusInput2 :: (String, String) -> [(Integer, Integer)]
+parseBusInput2 (xS, xsS) = parseBusInput' 0 $ splitOn "," (tail xsS)
+                         where
+                             parseBusInput' k [] = []
+                             parseBusInput' k (x:xs) 
+                                | x == "x"  = parseBusInput' (k+1) xs
+                                | otherwise = (k, read x) : parseBusInput' (k+1) xs
 xor :: Bool -> Bool -> Bool
 xor True  False = True
 xor False True  = True
