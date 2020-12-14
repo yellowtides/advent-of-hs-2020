@@ -57,6 +57,17 @@ parseBusInput2 (xS, xsS) = parseBusInput' 0 $ splitOn "," (tail xsS)
                              parseBusInput' k (x:xs) 
                                 | x == "x"  = parseBusInput' (k+1) xs
                                 | otherwise = (k, read x) : parseBusInput' (k+1) xs
+
+type Mask     = String
+type MemWrite = (Int, Int)
+
+parseSystem :: String -> Either Mask MemWrite
+parseSystem s
+    | l == "mask" = Left r
+    | otherwise   = Right (read . drop 4 $ init l, read r)
+    where
+        [l, r] = splitOn (" = ") s
+
 xor :: Bool -> Bool -> Bool
 xor True  False = True
 xor False True  = True
