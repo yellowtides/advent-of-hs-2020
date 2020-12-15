@@ -16,4 +16,4 @@ playGame seed = init seed ++ playGame' (last seed) (length seed) (HM.fromList $ 
 
 getSols :: ([Int], [Int]) -> (String, String)
 getSols (inp1, inp2) = (show $ playGame inp1!!(2020-1),
-                        show $ playGame inp2!!(3000000-1))
+                        show $ playGame inp2!!(30000000-1))
