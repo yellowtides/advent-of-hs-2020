@@ -28,6 +28,7 @@ dependencies:
 - sort >= 1.0
 - array >= 0.5.4
 - linear >= 1.21
+- extra >= 1.7.8
 
 library:
   source-dirs: src

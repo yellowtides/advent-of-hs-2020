@@ -68,6 +68,19 @@ parseSystem s
     where
         [l, r] = splitOn (" = ") s
 
+type LocRange = (Int, Int)
+type Ticket = [Int]
+
+parsef1 :: String -> (LocRange, LocRange)
+parsef1 f1 = let [n1, n2, n3, n4] = map read . filter (isDigit . head) $ splitOneOf " -" f1 in
+             ((n1, n2), (n3, n4))
+
+parseTicketDet :: String -> ([(LocRange, LocRange)], Ticket, [Ticket])
+parseTicketDet inp = let [f1, f2, f3] = splitOn "\n\n" inp in
+                     (map parsef1 $ splitOn "\n" f1,
+                     map read . splitOn "," . last $ splitOn "\n" f2,
+                     map (map read . splitOn ",") . tail $ splitOn "\n" f3)
+
 xor :: Bool -> Bool -> Bool
 xor True  False = True
 xor False True  = True

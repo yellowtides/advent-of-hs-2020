@@ -40,6 +40,7 @@ library
       Day13
       Day14
       Day15
+      Day16
       Utils
   other-modules:
       Paths_advent_of_haskell
@@ -49,6 +50,7 @@ library
       array >=0.5.4
     , base >=4.7 && <5
     , containers >=0.6
+    , extra >=1.7.8
     , linear >=1.21
     , sort >=1.0
     , split >=0.2
@@ -68,6 +70,7 @@ executable advent-of-haskell-exe
     , array >=0.5.4
     , base >=4.7 && <5
     , containers >=0.6
+    , extra >=1.7.8
     , linear >=1.21
     , sort >=1.0
     , split >=0.2
@@ -88,6 +91,7 @@ test-suite advent-of-haskell-test
     , array >=0.5.4
     , base >=4.7 && <5
     , containers >=0.6
+    , extra >=1.7.8
     , linear >=1.21
     , sort >=1.0
     , split >=0.2
