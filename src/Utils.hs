@@ -149,3 +149,10 @@ margin4 (i, j, k, w) aiii
         ((il, jl, kl, wl), (ir ,jr, kr, wr)) = bounds aiii
         allBounds = [il, jl, kl, wl, ir, jr, kr, wr]
         -- I know that this can be done with concat and uncurrying buuuut :(
+
+-- regex stuff
+
+parseRex :: [String] -> ([(Int, String)], [String])
+parseRex [rules, els] = (map parseR $ splitOn "\n" rules, splitOn "\n" els)
+    where
+        parseR = fmap (tail . tail) . first read . break (== ':')
