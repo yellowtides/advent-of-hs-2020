@@ -162,11 +162,16 @@ parseRex [rules, els] = (map parseR $ splitOn "\n" rules, splitOn "\n" els)
 type Piece = (String, String, String, String)
         --    Top,    Right,  Down,   Left
 
-parseJig :: [String] -> [(Int, Piece)]
-parseJig = map (parsePiece . splitOn "\n")
+parseJig :: [String] -> [((Int, Piece), [String])]
+parseJig = map (\g -> let g' = splitOn "\n" g in (parsePiece g', tail $ g'))
          where
              parsePiece (idstr:bodystr) = (read . takeWhile isDigit $ drop 5 idstr,
                                            (head bodystr,
                                             last $ transpose bodystr,
                                             last bodystr,
                                             head $ transpose bodystr))
+
+groupBy :: Int -> [a] -> [[a]]
+groupBy n xs 
+    | length xs <= n = [xs] 
+    | otherwise      = take n xs : groupBy n (drop n xs)  
