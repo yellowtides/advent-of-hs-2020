@@ -1,7 +1,7 @@
 module Utils where
 
 import Data.List.Split (splitOn, splitOneOf)
-import Data.List (delete, splitAt, inits, tails)
+import Data.List (delete, splitAt, inits, tails, transpose)
 import Data.Char (isDigit)
 import Data.Bifunctor (first)
 import Data.Array
@@ -156,3 +156,17 @@ parseRex :: [String] -> ([(Int, String)], [String])
 parseRex [rules, els] = (map parseR $ splitOn "\n" rules, splitOn "\n" els)
     where
         parseR = fmap (tail . tail) . first read . break (== ':')
+
+-- jigsaw!
+
+type Piece = (String, String, String, String)
+        --    Top,    Right,  Down,   Left
+
+parseJig :: [String] -> [(Int, Piece)]
+parseJig = map (parsePiece . splitOn "\n")
+         where
+             parsePiece (idstr:bodystr) = (read . takeWhile isDigit $ drop 5 idstr,
+                                           (head bodystr,
+                                            last $ transpose bodystr,
+                                            last bodystr,
+                                            head $ transpose bodystr))
