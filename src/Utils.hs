@@ -81,6 +81,11 @@ parseTicketDet inp = let [f1, f2, f3] = splitOn "\n\n" inp in
                      map read . splitOn "," . last $ splitOn "\n" f2,
                      map (map read . splitOn ",") . tail $ splitOn "\n" f3)
 
+parseIngredient :: String -> ([String], [String])
+parseIngredient s = let [l, r] = splitOn (" (contains ") s
+                        r' = init r in
+                        (splitOn " " l, splitOn ", " r')
+
 xor :: Bool -> Bool -> Bool
 xor True  False = True
 xor False True  = True
@@ -174,4 +179,4 @@ parseJig = map (\g -> let g' = splitOn "\n" g in (parsePiece g', tail $ g'))
 groupBy :: Int -> [a] -> [[a]]
 groupBy n xs 
     | length xs <= n = [xs] 
-    | otherwise      = take n xs : groupBy n (drop n xs)  
+    | otherwise      = take n xs : groupBy n (drop n xs)
