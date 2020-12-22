@@ -176,6 +176,10 @@ parseJig = map (\g -> let g' = splitOn "\n" g in (parsePiece g', tail $ g'))
                                             last bodystr,
                                             head $ transpose bodystr))
 
+parseGame :: String -> ([Int], [Int])
+parseGame s = let [p1, p2] = splitOn "\n\n" s in
+              (map read . tail $ splitOn "\n" p1, map read . tail $ splitOn "\n" p2)
+
 groupBy :: Int -> [a] -> [[a]]
 groupBy n xs 
     | length xs <= n = [xs] 

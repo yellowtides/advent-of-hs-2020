@@ -25,11 +25,12 @@ import qualified Day18 as D18 (getSols)
 import qualified Day19 as D19 (getSols)
 import qualified Day20 as D20 (getSols)
 import qualified Day21 as D21 (getSols)
+import qualified Day22 as D22 (getSols)
 
 import Utils (parseConstraint, parseSackRule, isBetween,
               parseCommand, parseBusInput, parseBusInput2,
               parseSystem, parseTicketDet, parseRex, parseJig,
-              parseIngredient)
+              parseIngredient, parseGame)
 
 pad2Dig :: Int -> String
 pad2Dig n
@@ -88,6 +89,8 @@ main = do
                                parseJig $ splitOn "\n\n" file2)
             21 -> D21.getSols (map parseIngredient $ splitOn "\n" file1,
                                map parseIngredient $ splitOn "\n" file2)
+            22 -> D22.getSols (parseGame file1,
+                               parseGame file2)
             _ -> error "Patience, fren."
     putStrLn $ "Star #1: " ++ star1
     putStrLn $ "Star #2: " ++ star2
