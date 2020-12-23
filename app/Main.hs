@@ -26,6 +26,7 @@ import qualified Day19 as D19 (getSols)
 import qualified Day20 as D20 (getSols)
 import qualified Day21 as D21 (getSols)
 import qualified Day22 as D22 (getSols)
+import qualified Day23 as D23 (getSols)
 
 import Utils (parseConstraint, parseSackRule, isBetween,
               parseCommand, parseBusInput, parseBusInput2,
@@ -91,6 +92,8 @@ main = do
                                map parseIngredient $ splitOn "\n" file2)
             22 -> D22.getSols (parseGame file1,
                                parseGame file2)
+            23 -> D23.getSols (map (read . pure) file1,
+                               map (read . pure) file2)
             _ -> error "Patience, fren."
     putStrLn $ "Star #1: " ++ star1
     putStrLn $ "Star #2: " ++ star2
