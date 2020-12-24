@@ -86,6 +86,12 @@ parseIngredient s = let [l, r] = splitOn (" (contains ") s
                         r' = init r in
                         (splitOn " " l, splitOn ", " r')
 
+parseTileLoc :: String -> [String]
+parseTileLoc []     = []
+parseTileLoc (x:xs) 
+    | x `elem` "ew" = [x] : parseTileLoc xs
+    | otherwise     = (x : take 1 xs) : parseTileLoc (drop 1 xs)
+
 xor :: Bool -> Bool -> Bool
 xor True  False = True
 xor False True  = True
