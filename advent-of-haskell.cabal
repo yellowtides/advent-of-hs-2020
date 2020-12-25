@@ -49,6 +49,7 @@ library
       Day22
       Day23
       Day24
+      Day25
       Utils
   other-modules:
       Paths_advent_of_haskell

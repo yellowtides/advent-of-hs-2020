@@ -92,6 +92,9 @@ parseTileLoc (x:xs)
     | x `elem` "ew" = [x] : parseTileLoc xs
     | otherwise     = (x : take 1 xs) : parseTileLoc (drop 1 xs)
 
+parsePubs :: String -> (Integer, Integer)
+parsePubs = first read . fmap (read . tail) . break (== '\n')
+
 xor :: Bool -> Bool -> Bool
 xor True  False = True
 xor False True  = True
@@ -144,7 +147,7 @@ margin3 (i, j, k) aiii
         allBounds = [il, jl, kl, ir, jr, kr]
         -- I know that this can be done with concat and uncurrying buuuut :(
 
--- 4d array stuff let's fucking go
+-- 4d array stuff :O
 
 genIndex4 :: (Int, Int) -> [(Int, Int, Int, Int)]
 genIndex4 (st, fi) = (,,,) <$> [st..fi] <*> [st..fi] <*> [st..fi] <*> [st..fi] 
