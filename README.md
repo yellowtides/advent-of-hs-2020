@@ -1,5 +1,5 @@
 # advent-of-haskell [2020]
-My solutions to Advent of Code 2020 (https://adventofcode.com/2020/), all written in Haskell with the help of the Haskell Tool Stack.
+My solutions to all 25 problems (50 stars) from Advent of Code 2020 (https://adventofcode.com/2020/), written in Haskell with the help of the Haskell Tool Stack.
 
 ## Installation/Usage
 In the root folder, run
